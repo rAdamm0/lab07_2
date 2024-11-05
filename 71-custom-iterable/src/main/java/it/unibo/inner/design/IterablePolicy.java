@@ -1,7 +1,6 @@
 package it.unibo.inner.design;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 
 import it.unibo.inner.api.IterableWithPolicy;
@@ -9,10 +8,12 @@ import it.unibo.inner.api.Predicate;
 
 public class IterablePolicy<T> implements IterableWithPolicy<T> {
 
-    private ArrayList<T> n;
+    private ArrayList<T> n = new ArrayList<>();
 
-    public IterablePolicy(Collection<T> n){
-        n.addAll(n);
+    public IterablePolicy(T[] n){
+        for(T h : n){
+            this.n.add(h);
+        }
     }
 
     private class PolicyIter implements Iterator<T>{
@@ -27,7 +28,7 @@ public class IterablePolicy<T> implements IterableWithPolicy<T> {
            }
 
         public T next() {
-            return n.get(this.length);
+            return n.get(this.length++);
         }
 
     }
