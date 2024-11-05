@@ -1,6 +1,8 @@
 package it.unibo.inner.design;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 
 import it.unibo.inner.api.IterableWithPolicy;
@@ -10,16 +12,14 @@ public class IterablePolicy<T> implements IterableWithPolicy<T> {
 
     ArrayList<T> n;
 
-    
-
-
-    public IterablePolicy(Collection<? extends T> n) {
-        this.n.addAll(n);
+    public IterablePolicy(Collection<T> n){
+        n.addAll(n);
     }
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
     }
 
     @Override
@@ -27,5 +27,6 @@ public class IterablePolicy<T> implements IterableWithPolicy<T> {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setIterationPolicy'");
     }
+
     
 }
