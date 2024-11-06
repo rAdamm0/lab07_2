@@ -1,9 +1,11 @@
 package it.unibo.nestedenum;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.List;
 
 /**
  * Implementation of {@link MonthSorter}.
@@ -33,16 +35,23 @@ public final class MonthSorterNested implements MonthSorter {
      
         private Month fromString(String s){
             int i;
+            List<Month> count = new ArrayList<>();
             for(Month temp : Month.values()){
                 i = 0;
                 char [] tm = temp.name().toCharArray();
                 char [] k = s.toCharArray();
                 for(; i < k.length  && Character.toUpperCase(tm[i]) == Character.toUpperCase(k[i]); i++);
                 if(i == k.length){
-                    return temp;
+                    //return temp;
+                    count.add(temp);
                 }
             }
-            throw new NoSuchElementException("No Month with such name exists");
+            if(count.isEmpty()){
+                throw new NoSuchElementException("No Month with such name exists");
+            }else if (count.size()>1){
+                throw new NoSuchElementException("Ambiguous input");
+            }
+            return count.get(0);
         }
        
         
