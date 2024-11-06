@@ -11,7 +11,7 @@ public class byDays implements Comparator<String>{
         Month enum0 = Month.fromString(arg0);
         Month enum1 = Month.fromString(arg1);
         if(enum0.dayNumb == enum1.dayNumb){
-            return 1;
+            return 0;
         }else if (enum0.dayNumb < enum1.dayNumb){
             return -1;
         }
