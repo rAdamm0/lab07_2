@@ -2,9 +2,11 @@ package it.unibo.nestedenum;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Locale;
 import java.util.NoSuchElementException;
-import java.util.Objects;
+
+import it.unibo.nestedenum.Comp.byDays;
+import it.unibo.nestedenum.Comp.byOrder;
+
 import java.util.List;
 
 /**
@@ -25,7 +27,7 @@ public final class MonthSorterNested implements MonthSorter {
         NOV(30),
         DEC(31);
 
-        private final int dayNumb;
+        public final int dayNumb;
         
 
         Month(int i) {
@@ -33,7 +35,7 @@ public final class MonthSorterNested implements MonthSorter {
         }
         
      
-        private Month fromString(String s){
+        public static Month fromString(String s){
             int i;
             List<Month> count = new ArrayList<>();
             for(Month temp : Month.values()){
@@ -47,9 +49,9 @@ public final class MonthSorterNested implements MonthSorter {
                 }
             }
             if(count.isEmpty()){
-                throw new NoSuchElementException("No Month with such name exists");
+                throw new IllegalArgumentException("No Month with such name exists");
             }else if (count.size()>1){
-                throw new NoSuchElementException("Ambiguous input");
+                throw new IllegalArgumentException("Ambiguous input");
             }
             return count.get(0);
         }
@@ -59,11 +61,11 @@ public final class MonthSorterNested implements MonthSorter {
 
     @Override
     public Comparator<String> sortByDays() {
-        return null;
+        return new byDays();
     }
 
     @Override
     public Comparator<String> sortByOrder() {
-        return null;
+        return new byOrder();
     }
 }
