@@ -2,6 +2,7 @@ package it.unibo.nestedenum;
 
 import java.util.Comparator;
 import java.util.Locale;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /**
@@ -36,11 +37,12 @@ public final class MonthSorterNested implements MonthSorter {
                 i = 0;
                 char [] tm = temp.name().toCharArray();
                 char [] k = s.toCharArray();
-                for(; i < k.length  && tm[i] == k [i]; i++);
+                for(; i < k.length  && Character.toUpperCase(tm[i]) == Character.toUpperCase(k[i]); i++);
                 if(i == k.length){
                     return temp;
                 }
             }
+            throw new NoSuchElementException("No Month with such name exists");
         }
        
         
