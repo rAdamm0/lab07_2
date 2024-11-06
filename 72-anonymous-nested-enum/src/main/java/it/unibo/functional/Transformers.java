@@ -119,12 +119,14 @@ public final class Transformers {
      * @param <I> elements type
      */
     public static <I> List<I> reject(final Iterable<I> base, final Function<I, Boolean> test) {
-        List<I> result = new ArrayList<>();
-        for(I k : base){
-            if(!test.call(k)){
-                result.add(k);
+        Function<I, Boolean> test1 = new Function<I,Boolean>() {
+
+            @Override
+            public Boolean call(I input) {
+               return !test.call(input);
             }
-        }
-        return result;
+            
+        };
+        return select(base, test1);
     }
 }
