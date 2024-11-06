@@ -10,10 +10,21 @@ public class IterablePolicy<T> implements IterableWithPolicy<T> {
 
     private ArrayList<T> n = new ArrayList<>();
 
-    public IterablePolicy(T[] n){
-        for(T h : n){
-            this.n.add(h);
+    public IterablePolicy(T[] elem, Predicate<T> pred){
+        for(T k : elem){
+            if(pred.test(k)){
+                this.n.add(k);
+            }
         }
+    }
+
+
+    public IterablePolicy(T[] elem){
+        this(elem, new Predicate<T>() {
+            public boolean test(T elem) {
+                return true;
+            }
+        });
     }
 
     private class PolicyIter implements Iterator<T>{
