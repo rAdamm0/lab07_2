@@ -9,8 +9,10 @@ import it.unibo.inner.api.Predicate;
 public class IterablePolicy<T> implements IterableWithPolicy<T> {
 
     private ArrayList<T> n = new ArrayList<>();
+    private Predicate<T> p;
 
     public IterablePolicy(T[] elem, Predicate<T> pred){
+        this.p = pred;
         for(T k : elem){
             if(pred.test(k)){
                 this.n.add(k);
@@ -39,23 +41,30 @@ public class IterablePolicy<T> implements IterableWithPolicy<T> {
            }
 
         public T next() {
-            return n.get(this.length++);
+            do {
+                if(this.hasNext() && p.test(n.get(this.length))){
+                    return n.get(this.length++);
+                    }
+                this.length++;
+                }while(this.hasNext());
+            return null;
         }
 
     }
     
     @Override
     public Iterator<T> iterator() {
-        PolicyIter n = new PolicyIter();
-        return n;
+        return new PolicyIter();
     }
 
     @Override
     public void setIterationPolicy(Predicate<T> filter) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setIterationPolicy'");
+        this.p = filter;
     }
 
     
 }
+
+
+    
 
