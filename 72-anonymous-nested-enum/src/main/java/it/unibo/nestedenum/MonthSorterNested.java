@@ -42,7 +42,7 @@ public final class MonthSorterNested implements MonthSorter {
                 i = 0;
                 char [] tm = temp.name().toCharArray();
                 char [] k = s.toCharArray();
-                for(; i < k.length  && Character.toUpperCase(tm[i]) == Character.toUpperCase(k[i]); i++);
+                for(; i < k.length && i < tm.length  && Character.toUpperCase(tm[i]) == Character.toUpperCase(k[i]); i++);
                 if(i == k.length){
                     //return temp;
                     count.add(temp);
