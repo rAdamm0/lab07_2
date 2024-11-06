@@ -30,6 +30,18 @@ public final class MonthSorterNested implements MonthSorter {
         }
         
      
+        private Month fromString(String s){
+            int i;
+            for(Month temp : Month.values()){
+                i = 0;
+                char [] tm = temp.name().toCharArray();
+                char [] k = s.toCharArray();
+                for(; i < k.length  && tm[i] == k [i]; i++);
+                if(i == k.length){
+                    return temp;
+                }
+            }
+        }
        
         
     }
