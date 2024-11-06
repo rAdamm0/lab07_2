@@ -1,6 +1,7 @@
 package it.unibo.inner.design;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 import it.unibo.inner.api.IterableWithPolicy;
@@ -10,12 +11,14 @@ public class IterablePolicy<T> implements IterableWithPolicy<T> {
 
     private ArrayList<T> n = new ArrayList<>();
     private Predicate<T> p;
+    private int count = 0;
 
     public IterablePolicy(T[] elem, Predicate<T> pred){
         this.p = pred;
         for(T k : elem){
             if(pred.test(k)){
                 this.n.add(k);
+                count++;
             }
         }
     }
@@ -34,19 +37,19 @@ public class IterablePolicy<T> implements IterableWithPolicy<T> {
         private int length=0;
 
         public boolean hasNext() {
-            if (length>= n.size()) {
+            if (this.length >= n.size()) {
                 return false;
             }
             return true;
            }
 
         public T next() {
-            do {
-                if(this.hasNext() && p.test(n.get(this.length))){
-                    return n.get(this.length++);
-                    }
+            while(this.hasNext()){
+                if(p.test(n.get(this.length))){
+                return n.get(this.length++);
+                }
                 this.length++;
-                }while(this.hasNext());
+            }
             return null;
         }
 
@@ -54,12 +57,26 @@ public class IterablePolicy<T> implements IterableWithPolicy<T> {
     
     @Override
     public Iterator<T> iterator() {
-        return new PolicyIter();
+        if(count != 0){
+            return new PolicyIter();
+        }
+        return Collections.emptyListIterator();
+    }
+
+    private int checkCount(){
+        int a = 0;
+        for(T k : this.n){
+            if(this.p.test(k)){
+                a++;
+            }
+        }
+        return a;
     }
 
     @Override
     public void setIterationPolicy(Predicate<T> filter) {
         this.p = filter;
+        count = checkCount();
     }
 
     
