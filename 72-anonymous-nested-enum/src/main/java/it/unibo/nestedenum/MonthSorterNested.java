@@ -14,18 +14,18 @@ import java.util.List;
  */
 public final class MonthSorterNested implements MonthSorter {
     public enum Month{
-        JAN(31),
-        FEB(28),
-        MAR(31),
-        APR(30),
-        MAY(31),
-        JUN(30),
-        JUL(31),
-        AUG(31),
-        SEP(30),
-        OCT(31),
-        NOV(30),
-        DEC(31);
+        January(31),
+        February(28),
+        March(31),
+        April(30),
+        May(31),
+        June(30),
+        July(31),
+        August(31),
+        september(30),
+        October(31),
+        November(30),
+        December(31);
 
         public final int dayNumb;
         
