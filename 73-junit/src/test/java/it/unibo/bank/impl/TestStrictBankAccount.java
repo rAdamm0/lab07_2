@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**
@@ -70,7 +71,9 @@ class TestStrictBankAccount {
      */
     @Test
     public void testNegativeWithdraw() {
-        fail("To be implemented");
+        assertThrows(IllegalArgumentException.class, () ->{
+            bankAccount.withdraw(0, -75);
+        });
     }
 
     /**
@@ -78,6 +81,8 @@ class TestStrictBankAccount {
      */
     @Test
     public void testWithdrawingTooMuch() {
-        fail("To be implemented");
+        assertThrows(IllegalArgumentException.class, () ->{
+            bankAccount.withdraw(0, 3000);
+        });
     }
 }
