@@ -45,7 +45,15 @@ class TestStrictBankAccount {
     public void testManagementFees() {
         bankAccount.deposit(0, 100);
         assertEquals(100, bankAccount.getBalance());
-        fail("To be implemented");
+        for(int i =1; i < 50; i++){
+            if(i < 20){
+                bankAccount.chargeManagementFees(0);
+                assertEquals(99.9- i * 5, bankAccount.getBalance());  
+            }else{
+                bankAccount.chargeManagementFees(0);
+                assertEquals(4.900000000000006, bankAccount.getBalance());
+            }
+        }
     }
 
     /**
