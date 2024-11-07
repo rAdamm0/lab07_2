@@ -2,7 +2,6 @@ package it.unibo.nestedenum;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.NoSuchElementException;
 
 import it.unibo.nestedenum.Comp.byDays;
 import it.unibo.nestedenum.Comp.byOrder;
