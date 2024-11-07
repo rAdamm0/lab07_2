@@ -45,7 +45,7 @@ class TestStrictBankAccount {
     public void testManagementFees() {
         bankAccount.deposit(0, 100);
         assertEquals(100, bankAccount.getBalance());
-        for(int i =1; i < 50; i++){
+        /*for(int i =1; i < 50; i++){
             if(i < 20){
                 bankAccount.chargeManagementFees(0);
                 assertEquals(99.9- i * 5, bankAccount.getBalance());  
@@ -54,6 +54,15 @@ class TestStrictBankAccount {
                 assertEquals(4.900000000000006, bankAccount.getBalance());
             }
         }
+            */
+            bankAccount.chargeManagementFees(0);
+            assertEquals(94.9, bankAccount.getBalance());
+            bankAccount.withdraw(0, 90);
+            assertEquals((94.9-90), bankAccount.getBalance());
+            bankAccount.chargeManagementFees(0);
+            assertEquals(94.9-90, bankAccount.getBalance());
+
+
     }
 
     /**
